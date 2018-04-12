@@ -45,7 +45,7 @@ public:
    *  Data items. (should not use ==, >, <=, >=)  For the reasoning
    *  behind this, see the assignment writeup.
    */
-  bool insert(int item);
+  bool insert(int & item);
 
 
   /** Find a Data item in the BST.

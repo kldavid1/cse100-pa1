@@ -28,7 +28,7 @@ BSTInt::~BSTInt() {
  *  behind this, see the assignment writeup.
  */
 
-bool BSTInt::insert(int item)
+bool BSTInt::insert(int & item)
 {
   if (!root) {
     root = new BSTNodeInt(item);
