@@ -28,7 +28,7 @@ BSTInt::~BSTInt() {
  *  behind this, see the assignment writeup.
  */
 
-bool BSTInt::insert(int & item)
+bool BSTInt::insert(int item)
 {
   if (!root) {
     root = new BSTNodeInt(item);
@@ -62,35 +62,6 @@ bool BSTInt::insert(int & item)
     }
   }
 
-  /*
-  while( curr->left || curr->right ) {  
-    if ( item < curr->data ) {
-      curr = curr->left;
-    }
-    else if ( curr->data < item ) {
-      curr = curr->right;
-    } 
-    else {
-      return false;  
-    }
-  }
-
-  // Ready to insert
-  BSTNodeInt* newNode = new BSTNodeInt(item);
-  if ( item < curr->data && !curr->left ) {
-    curr->left = newNode;
-    newNode->parent = curr;
-  }
-  else if( curr->data < item && !curr->right ) {
-    curr->right = newNode;
-    newNode->parent = curr;
-  }
-  else {
-    delete newNode;
-    return false;
-  }
-  */
- 
   ++isize;
   return true;
 
