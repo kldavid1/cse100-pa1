@@ -38,25 +38,50 @@ bool BSTInt::insert(int & item)
 
   BSTNodeInt* curr = root;
   
-  while (curr->left && curr->right) {
-    if (item < curr->data) {
+  while( curr ) {
+    if( item < curr->data ) {
+      if( !curr->left ) {
+        BSTNodeInt * newNode = new BSTNodeInt(item);
+        curr->left = newNode;
+        newNode->parent = curr;
+        curr = nullptr;
+      } else {
+          curr = curr->left;
+      }
+    } else if( curr->data < item ){
+      if( !curr->right ) {
+        BSTNodeInt * newNode = new BSTNodeInt(item);
+        curr->right = newNode;
+        newNode->parent = curr;
+        curr = nullptr;
+      } else {
+          curr = curr->right;
+      }
+    } else {
+        return false;
+    }
+  }
+
+  /*
+  while( curr->left || curr->right ) {  
+    if ( item < curr->data ) {
       curr = curr->left;
     }
-    else if (curr->data < item) {
+    else if ( curr->data < item ) {
       curr = curr->right;
-    }
+    } 
     else {
-      return false;
+      return false;  
     }
   }
 
   // Ready to insert
   BSTNodeInt* newNode = new BSTNodeInt(item);
-  if (item < curr->data) {
+  if ( item < curr->data && !curr->left ) {
     curr->left = newNode;
     newNode->parent = curr;
   }
-  else if(curr->data < item) {
+  else if( curr->data < item && !curr->right ) {
     curr->right = newNode;
     newNode->parent = curr;
   }
@@ -64,7 +89,8 @@ bool BSTInt::insert(int & item)
     delete newNode;
     return false;
   }
-
+  */
+ 
   ++isize;
   return true;
 

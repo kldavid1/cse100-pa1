@@ -80,6 +80,7 @@ int main() {
     if(dne) {
       cout << "Incorrect bool return value when finding item that doesnt" <<
       " exist: " << node << endl;
+      return -1;
     }
 
     /* Insert a duplicate element into the BST */
@@ -101,11 +102,20 @@ int main() {
     /* Testing empty on non-empty BST */
     if( b.empty() ) {
       cout << "Incorrect bool return value for non-empty BST." << endl;
+      return -1;
+    }
+
+    /* Testing find on empty BST */
+    dne = b1.find(50000);
+    if(dne) {
+      cout << "Incorrect bool return value on empty BST" << endl;
+      return -1;
     }
 
     /* Testing empty on BST with no elements */
     if( !b1.empty() ) {
       cout << "Incorrect bool return value for empty BST." << endl;
+      return -1;
     }
 
     /* Testing height on empty BST */
@@ -113,6 +123,7 @@ int main() {
     if( height != -1 ) {
       cout << "Incorrect height for empty BST." << endl;
       cout << "Expected: -1  Actual: " << height << endl;
+      return -1;
     }
 
     /* Testing height on BST with >1 elements */
@@ -120,15 +131,68 @@ int main() {
     if( height != 2 ) {
       cout << "Height was " << height << endl;
       cout << ".... which is incorrect" << endl;
+      return -1;
     }
 
     /* Testing height on BST with only root */
-    b1.insert(50);
+    node = 50;
+    bool pr = b1.insert(node);
     height = b1.height();
     if( height!= 0 ) {
       cout << "Height for one node tree was " << height << endl;
       cout << ".... which is incorrect" << endl;
+      return -1;
     }
+
+    /* Testing insert on empty tree */
+    if( !pr ) {
+      cout << "Incorrect bool return value upon inserting item : ";
+      cout << node << " into BST" << endl;
+      return -1;
+    }
+    /* Test to see if size was properly updated */
+    if( b1.size() != 1 ){
+      cout << "Size is: " << b1.size() << endl;
+      cout << "....which is incorrect" << endl;
+      return -1;
+    }
+
+    /* Test height on one node tree */
+    if( b1.height() != 0 ) {
+      cout << "Height is: " << b1.height() << endl;
+      cout << ".... but expected height 0 for one node BST" << endl;
+      return -1;
+    }
+
+    /* Test insert on unbalanced tree */
+    node = 30;
+    if( !b1.insert(node) ) {
+      cout << "Incorrect bool return value upon inserting item : ";
+      cout << node << " into BST" << endl;
+      return -1;
+    }
+
+    node = 45;
+    if( !b1.insert(node) ) {
+      cout << "Incorrect bool return value upon inserting item: ";
+      cout << node << " into BST" << endl;
+      return -1;
+    }
+
+    /* Check to see if inserted items are still in tree */
+    dne = b1.find(45);
+    if( !dne ) {
+      cout << "Incorrect bool return value when finding item: 45" << endl;
+      return -1;
+    }
+
+    dne = b1.find(30);
+    if( !dne ) {
+      cout << "Incorrect bool return value when finding item: 30" << endl;
+      return -1;
+    }
+
+
 
 
     /* UNCOMMENT THE LINES BELOW TO TEST THE TEMPLATE-BASED ITERATOR */
